@@ -76,6 +76,9 @@ class AutomaticAPIClient
 
     "#{baseUrl}#{authorizeUrl}?#{query}"
 
+  setAccessToken: (token) ->
+    @accessToken = JSON.parse token
+
   accessGranted: ({state, code}, done) ->
     return done new Error('Invalid state') unless state is @state
 

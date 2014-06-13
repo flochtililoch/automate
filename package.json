@@ -2,17 +2,19 @@
   "name": "automate",
   "version": "0.0.0-dev",
   "description": "Automatic Link API Client",
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org"
+  },
   "homepage": "https://github.com/flochtililoch/automate",
   "keywords": [],
-  "author": {
-    "name": "flochtililoch",
-    "email": "flochtililoch@gmail.com"
-  },
+  "author": "flochtililoch <flochtililoch@gmail.com>",
   "repository": {
     "type": "git",
     "url": "git://github.com/flochtililoch/automate"
   },
-  "bugs": "https://github.com/flochtililoch/automate/issues",
+  "bugs": {
+    "url": "https://github.com/flochtililoch/automate/issues"
+  },
   "engines": {
     "node": "0.8.x || 0.9.x || 0.10.x"
   },
@@ -28,7 +30,6 @@
   "devDependencies": {
     "coffee-script-redux": "2.0.0-beta7",
     "commonjs-everywhere": "0.9.x",
-    "mocha": "~1.12.1",
     "scopedfs": "~0.1.0",
     "semver": "~2.1.0"
   }
