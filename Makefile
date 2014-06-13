@@ -7,6 +7,7 @@ SRC = $(shell find "$(SRCDIR)" -name "*.coffee" -type f | sort)
 LIB = $(SRC:$(SRCDIR)/%.coffee=$(LIBDIR)/%.js)
 
 COFFEE=node_modules/.bin/coffee --js
+SEMVER=node_modules/.bin/semver
 
 build: $(LIB)
 
