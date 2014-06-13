@@ -1,6 +1,6 @@
 {
   "name": "automate",
-  "version": "0.0.0-dev",
+  "version": "",
   "description": "Automatic Link API Client",
   "publishConfig": {
     "registry": "http://registry.npmjs.org"
