@@ -3,6 +3,7 @@ request       = require 'request'
 url           = require 'url'
 qs            = require 'qs'
 config        = require './config'
+{extend}      = require 'underscore'
 
 class AutomaticAPIClient
 
@@ -54,14 +55,16 @@ class AutomaticAPIClient
 
         done noErr, @accessToken
 
-    @fetch = (endpoint, done) ->
+    @fetch = (options, done) ->
+      options = extend {}, options
+      return done new Error('uri is required') unless options.uri?
+
       @getAccessToken (err, {accessToken}) =>
         return done err if err?
 
-        options =
-          headers:
-            'Authorization': "#{@auth.method} #{accessToken}"
-          uri: "#{@api.baseUrl}#{endpoint}"
+        options.uri = "#{@api.baseUrl}#{options.uri}"
+        options.headers ?= {}
+        options.headers['Authorization'] = "#{@auth.method} #{accessToken}"
 
         request options, done
 
@@ -85,11 +88,15 @@ class AutomaticAPIClient
     @code = code
     @getAccessToken done
 
-  getTrips: (done) ->
-    @fetch '/trips', done
+  getTrips: (options = {}, done) ->
+    options.uri = '/trips'
+    @fetch options, done
 
-  getTrip: (id, done) ->
-    @fetch "/trips/#{id}", done
+  getTrip: (options = {}, done) ->
+    return done new Error('id is required') unless options.id?
+    options.uri = "/trips/#{options.id}"
+    delete options.id
+    @fetch options, done
 
 
 module.exports.AutomaticAPIClient = AutomaticAPIClient

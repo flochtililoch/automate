@@ -27,8 +27,14 @@ app.use cookieParser()
 app.get '/', (req, res) ->
   accessToken = req.cookies[automaticAccessToken]
   res.redirect api.getAuthorizeUrl() unless accessToken
+
+  # optionally define request parameters
+  qs =
+    page: req.query.page or 1
+    max_per_page: 100
+
   api.setAccessToken accessToken
-  api.getTrips (err, response) ->
+  api.getTrips {qs}, (err, response) ->
     res.end response.body
 
 app.get '/redirect', (req, res) ->
